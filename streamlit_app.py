@@ -4,6 +4,10 @@ import pandas as pd
 import pickle
 import base64 
 
+# Initialize session state
+if "show_guide" not in st.session_state:
+    st.session_state.show_guide = False
+
 # Function to calculate stability based on the provided stability map
 def calculate_stability(sequence, stability_map):
     size = len(sequence)
@@ -122,8 +126,17 @@ example_sequence = (
 
 # Streamlit app
 def main():
-    st.title("XgBoost Promoter Prediction")
+    st.title("MLDSPP Promoter Prediction Tool")
 
+    # Add a link to navigate to the new page with the flowchart
+    if st.button("View App Guide"):
+        st.session_state.show_guide = True
+        st.experimental_rerun()
+
+    if st.session_state.show_guide:
+        st.subheader("App Guide")
+        display_flowchart()
+    
     st.sidebar.header("Choose Input Method")
     input_method = st.sidebar.radio(
         "Select how to provide sequences:",
@@ -184,6 +197,10 @@ def download_button(df_predictions):
     b64 = base64.b64encode(csv.encode()).decode()  # Convert DataFrame to base64
     href = f'<a href="data:file/csv;base64,{b64}" download="predictions.csv">Download Predictions as CSV</a>'
     st.markdown(href, unsafe_allow_html=True)
+
+def display_flowchart():
+    # Display the flowchart image on a separate page
+    st.image("user guide.png", use_column_width=True)
 
 if __name__ == "__main__":
     main()
