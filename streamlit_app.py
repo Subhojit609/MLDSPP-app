@@ -169,6 +169,47 @@ def main():
             predictions = predict(df_stability, model)
             df_predictions = display_predictions(df_stability, predictions, sequences)  # Save the returned DataFrame
             download_button(df_predictions)  # Add download button
+            
+    #Additional Informations:
+    st.write("Welcome to DNA Structural Property and Machine Learning Based Bacterial Promoter Prediction Tool")
+    
+    # Center align the text "Connect with the creator:"
+    st.markdown(
+        """
+        <div class="center">
+            <p style="font-size: 18px;">Connect with the creator:</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Center align the LinkedIn and GitHub icons
+    st.markdown(
+        """
+        <style>
+        .center {
+            display: flex;
+            justify-content: center;
+        }
+        </style>
+        """,
+        unsafe_allow_html=True
+    )
+
+    # Add your LinkedIn and GitHub profile links here
+    linkedin_url = "https://www.linkedin.com/in/subhojit-paul-262356226/"
+    github_url = "https://github.com/Subhojit609/"
+
+    # Add the LinkedIn and GitHub icons with links to your profiles in the center-aligned container
+    st.markdown(
+        """
+        <div class="center">
+            <a href="{linkedin_url}" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" width="30"></a>
+            <a href="{github_url}" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="30"></a>
+        </div>
+        """.format(linkedin_url=linkedin_url, github_url=github_url),
+        unsafe_allow_html=True
+    )
 
 
 def predict(df_stability, model):
